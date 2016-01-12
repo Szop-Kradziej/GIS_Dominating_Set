@@ -4,6 +4,11 @@ import getopt
 import csv 
 from com.drabarz.karolina.DominatingSetAlgorithm import DominatingSetAlgorithm
 from com.drabarz.karolina.NetworkXAlgorithm import NetworkXAlgorithm
+from com.drabarz.karolina.GreedyAlgorithm import GreedyAlgorithm
+from com.drabarz.karolina.DispersedGreedyAlgorithm import DispersedGreedyAlgorithm
+from com.drabarz.karolina.ClassicalSetCoverageAlgorithm import ClassicalSetCoverageAlgorithm
+from com.drabarz.karolina.ModifiedGreedyAlgorithm import ModifiedGreedyAlgorithm
+from com.drabarz.karolina.FastGreedyAlgorithm import FastGreedyAlgorithm
 
 def getCommandLineArguments():
     argv = sys.argv[1:]
@@ -58,21 +63,27 @@ def chooseAlgorithm():
         showMainMenu();
         answer = raw_input();
         if answer == '1' :
-            return DominatingSetAlgorithm();
+            return GreedyAlgorithm();
         elif answer == '2' :
-            return DominatingSetAlgorithm();
+            return DispersedGreedyAlgorithm();
         elif answer == '3' :
-            return DominatingSetAlgorithm();
+            return ClassicalSetCoverageAlgorithm();
         elif answer == '4' :
+            return ModifiedGreedyAlgorithm();
+        elif answer == '5' :
+            return FastGreedyAlgorithm();
+        elif answer == '6' :
             return NetworkXAlgorithm();
         sys.exc_clear();
 
 def showMainMenu():
     print "Choose algorithm to calculate the smallest dominating set: "
-    print "\t1) algorithm1"
-    print "\t2) algorithm2"
-    print "\t3) algorithm3"
-    print "\t4) use algorithm implemented in NetworkX library"
+    print "\t1) greedy algorithm"
+    print "\t2) dispersed greedy algorithm"
+    print "\t3) classical set coverage algorithm"
+    print "\t4) modified greedy algorithm"
+    print "\t5) fast greedy algorithm"
+    print "\t6) use algorithm implemented in NetworkX library"
     return;
 
 def printGraphParamiters(graph):
