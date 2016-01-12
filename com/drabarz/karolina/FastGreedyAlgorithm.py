@@ -6,16 +6,15 @@ class FastGreedyAlgorithm (object):
         
         dominating_set = []
         sorted_nodes = self.getSortedNodes(graph)
-        i = 1
+        i = 0
         nodes = nx.nodes(graph)
         neighbor_sum_set = self.sumOfNeighbours(graph, i, sorted_nodes)
         while len(neighbor_sum_set) < len(nodes):
             node = sorted_nodes[i]
-            if not self.isNodeNeighborsInSum(graph, node, neighbor_sum_set):
+            if not self.isNodeNeighborsInSum(graph, node, self.sumOfNeighbours(graph, i - 1, sorted_nodes)):
                 dominating_set.append(node)
             i += 1
             neighbor_sum_set = self.sumOfNeighbours(graph,i, sorted_nodes)
-        print sorted_nodes
         
         return dominating_set;
     
@@ -26,9 +25,9 @@ class FastGreedyAlgorithm (object):
         return sorted_nodes
     
     def sumOfNeighbours(self, graph, i, sorted_nodes):
-        sum = []
         
-        for j in range(0, i - 1):
+        sum = []
+        for j in range(0, i):
             node = sorted_nodes[j]
             neighbors = graph.neighbors(node)
             sum = self.addNeighborsToSum(sum, neighbors)
