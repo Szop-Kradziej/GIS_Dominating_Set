@@ -101,7 +101,8 @@ def saveDominatingSet(dominatingSet, setFile):
     with open(setFile, 'wb') as outputFile:
         writer = csv.writer(outputFile);
         outputFile.write("#Number of nodes in dominating set: " + str(len(dominatingSet)) + "\n");
-        writer.writerows(dominatingSet);
+        for i in range(0, len(dominatingSet)):
+            outputFile.write(str(dominatingSet[i])+ '\n')
     return;
 
 def checkIfSetIsDominating(graph, setFile):
