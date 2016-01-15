@@ -2,7 +2,7 @@ import networkx as nx
 
 class ClassicalSetCoverageAlgorithm (object):
     def findDominatingSet(self, graph):
-        print "CSCA"
+        print "Algorithm: Classical set coverage"
         
         dominating_set = []
         coverage_sets = self.getCoverageSets(graph)

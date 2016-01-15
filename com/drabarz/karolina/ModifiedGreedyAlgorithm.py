@@ -3,7 +3,7 @@ import copy
 
 class ModifiedGreedyAlgorithm (object):
     def findDominatingSet(self, graph):
-        print "MGA"
+        print "Algorithm: Modified greedy"
         
         modify_graph = copy.deepcopy(graph)
         dominating_set = []

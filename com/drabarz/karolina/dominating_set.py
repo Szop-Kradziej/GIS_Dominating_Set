@@ -57,7 +57,7 @@ def findAndShowDominatingSet(graph, setFile):
     start_time = time.time()
     dominatingSet = algorithm.findDominatingSet(graph);
     stop_time = time.time() - start_time
-    print "Algorithm execution time = %lf", stop_time
+    print "Algorithm execution time = ", stop_time
     printDominatingSet(dominatingSet);
     saveDominatingSet(dominatingSet, setFile);
     return;
@@ -91,8 +91,9 @@ def showMainMenu():
     return;
 
 def printGraphParamiters(graph):
+    print "Graph description: "
     print "Number of nodes: ", nx.number_of_nodes(graph);
-    print "Number of edges: ", nx.number_of_edges(graph);
+    print "Number of edges: ", nx.number_of_edges(graph), "\n";
     return;
 
 def printDominatingSet(dominatingSet):

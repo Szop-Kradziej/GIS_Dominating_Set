@@ -2,7 +2,7 @@ import networkx as nx
 
 class FastGreedyAlgorithm (object):
     def findDominatingSet(self, graph):
-        print "FGA"
+        print "Algorithm: Fast greedy"
         
         dominating_set = []
         sorted_nodes = self.getSortedNodes(graph)
