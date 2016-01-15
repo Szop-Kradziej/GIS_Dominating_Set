@@ -2,6 +2,7 @@ import networkx as nx
 import sys
 import getopt
 import csv 
+import time
 from com.drabarz.karolina.DominatingSetAlgorithm import DominatingSetAlgorithm
 from com.drabarz.karolina.NetworkXAlgorithm import NetworkXAlgorithm
 from com.drabarz.karolina.GreedyAlgorithm import GreedyAlgorithm
@@ -53,7 +54,10 @@ def createGraphFromFile(graphFile):
 def findAndShowDominatingSet(graph, setFile):
     algorithm = chooseAlgorithm();
     printGraphParamiters(graph);
+    start_time = time.time()
     dominatingSet = algorithm.findDominatingSet(graph);
+    stop_time = time.time() - start_time
+    print "Algorithm execution time = %lf", stop_time
     printDominatingSet(dominatingSet);
     saveDominatingSet(dominatingSet, setFile);
     return;
