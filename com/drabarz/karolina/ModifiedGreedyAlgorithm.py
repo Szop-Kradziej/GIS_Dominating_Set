@@ -25,10 +25,15 @@ class ModifiedGreedyAlgorithm (object):
     def removeNodeAndNeighbors(self, graph, node):
         new_graph = graph
         neighbors = new_graph.neighbors(node)
+        node_in_neighbors = False
+        
+        if(node in neighbors):
+            node_in_neighbors = True
         
         for neighbor in neighbors:
             if neighbor in new_graph:
                 new_graph.remove_node(neighbor)
-                
-        new_graph.remove_node(node)
+        
+        if not node_in_neighbors:
+            new_graph.remove_node(node)
         return new_graph
