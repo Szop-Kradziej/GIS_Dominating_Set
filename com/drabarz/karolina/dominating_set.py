@@ -36,19 +36,26 @@ def getCommandLineArguments():
             graphFile = arg
         elif opt in ("-s", "--setFile"):
             setFile = arg
-    print 'Graph file is "', graphFile
-    print 'Set file is "', setFile
+    print 'Graph file is: ', graphFile
+    print 'Set file is: ', setFile
     return [graphFile, setFile, action];
 
 def createGraphFromFile(graphFile):
     graph = nx.Graph();
     
-    with open(graphFile, "rb") as inputfile:
-        reader = csv.reader(inputfile);
-        for i, line in enumerate(reader):
-            if i < 4: continue
-            edge = line[0].split('\t')
-            graph.add_edge(edge[0], edge[1]);
+    try:
+        with open(graphFile, "rb") as inputfile:
+            reader = csv.reader(inputfile);
+            for i, line in enumerate(reader):
+                if i < 4: continue
+                edge = line[0].split('\t')
+                graph.add_edge(edge[0], edge[1]);
+    except IOError:
+        print 'There is a incorrect name of graph file'
+        sys.exit()
+    except IndexError:
+        print 'Incorrect input file structure'
+        sys.exit()
     return graph;
 
 def findAndShowDominatingSet(graph, setFile):
@@ -103,11 +110,15 @@ def printDominatingSet(dominatingSet):
     return;
 
 def saveDominatingSet(dominatingSet, setFile):
-    with open(setFile, 'wb') as outputFile:
-        writer = csv.writer(outputFile);
-        outputFile.write("#Number of nodes in dominating set: " + str(len(dominatingSet)) + "\n");
-        for i in range(0, len(dominatingSet)):
-            outputFile.write(str(dominatingSet[i])+ '\n')
+    
+    try:
+        with open(setFile, 'wb') as outputFile:
+            writer = csv.writer(outputFile);
+            outputFile.write("#Number of nodes in dominating set: " + str(len(dominatingSet)) + "\n");
+            for i in range(0, len(dominatingSet)):
+                outputFile.write(str(dominatingSet[i])+ '\n')
+    except IOError:
+        print 'There is no set file name selected'
     return;
 
 def checkIfSetIsDominating(graph, setFile):
@@ -118,13 +129,19 @@ def checkIfSetIsDominating(graph, setFile):
 
 def createSetFromFile(setFile):
     inputSet = set();
-    
-    with open(setFile, "rb") as inputfile:
-        reader = csv.reader(inputfile);
-        for i, line in enumerate(reader):
-            if i < 1: continue
-            node = line[0];
-            inputSet.add(node);
+    try:
+        with open(setFile, "rb") as inputfile:
+            reader = csv.reader(inputfile);
+            for i, line in enumerate(reader):
+                if i < 1: continue
+                node = line[0];
+                inputSet.add(node);
+    except IOError:
+        print 'There is a wrong name of set file'
+        sys.exit()
+    except IndexError:
+        print 'Incorrect input file structure'
+        sys.exit()
     return inputSet;
 
 def checkIfIsDominatingSet(graph, dominatingSet):
